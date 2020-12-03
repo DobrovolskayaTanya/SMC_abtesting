@@ -1,0 +1,22 @@
+{
+  "welcomeFile": "/webapp/index.html",
+  "routes": [
+    {
+      "path": "/API_MKT_INTERACTION_SRV",
+      "target": {
+        "type": "destination",
+        "name": "API_MKT_INTERACTION_SRV"
+      },
+      "description": "SMC Interaction API"
+    },
+     {
+      "path": "/webapp/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources"
+      },
+      "description": "SAPUI5 Resources"
+    }
+  ]
+}

@@ -12,7 +12,7 @@
 			<pages>
 				<Page>
 	<VBox class="sapUiSmallMargin">
-		<f:Form id="FormDisplayColumn_twoGroups234"
+		<f:Form id="FormDisplayColumn_twoGroups234" class="sapUiSmallMarginBottom"
 			editable="true">
 			<f:title>
 				<core:Title text="Abandoned basket information" />
@@ -25,35 +25,86 @@
 				/>
 			</f:layout>
 			<f:formContainers>
-				<f:FormContainer title="Contact">
+				<f:FormContainer title="Abandoned Basket" >
 					<f:formElements>
-						<f:FormElement label="Contact ID">
+						<f:FormElement  label="Email">
 							<f:fields>
-								<Input value="{/contact}" valueLiveUpdate="true" width="300px" enabled="{/enabled}" 	required="true"/>
-							</f:fields>
+								<Input  id="email" enabled="{/enabled}"  valueLiveUpdate="true" width="300px" required="true"/>
+						</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Navigation">
+							<f:fields>
+								<Input id="navigation" enabled="{/enabled}"  valueLiveUpdate="true" width="350px" required="true"/>
+						</f:fields>
 						</f:FormElement>
 						</f:formElements>
 				</f:FormContainer>
-				<f:FormContainer title="Order details">
+				<f:FormContainer title="Order details" >
 					<f:formElements>
 						<f:FormElement label="Currency">
 							<f:fields>
-								<Input value="{/order/currency}" valueLiveUpdate="true" width="60px" enabled="{/enabled}" required="true"/>
+							<Select id="currency" width="120px">
+								<core:ListItem
+							    text="EUR"
+								key="EUR"/>
+								<core:ListItem
+							    text="GBP"
+								key="GBP"/>
+								<core:ListItem
+							    text="USD"
+								key="USD"/>
+								<core:ListItem
+							    text="CZK"
+								key="CZK"/>
+							</Select>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Price List Locale">
 							<f:fields>
-								<Input value="{/order/locale}" valueLiveUpdate="true" width="120px" enabled="{/enabled}" required="true"/>
+									<Select id="locale" width="150px">
+											   <core:ListItem
+											    text="en_SI_EUR"
+												key="en_SI_EUR"/>
+												<core:ListItem
+											    text="en_GB_GBP"
+												key="en_GB_GBP"/>
+												<core:ListItem
+											    text="en_US_USD"
+												key="en_US_USD"/>
+												<core:ListItem
+											    text="en_CZ_CZK"
+												key="en_CZ_CZK"/>
+									</Select>
 							</f:fields>
 						</f:FormElement>
-							<f:FormElement label="Interaction Product Count">
+							<f:FormElement label="Interaction source object">
 							<f:fields>
-								<Input value="{/order/count}" valueLiveUpdate="true" width="20px" enabled="{/enabled}" required="true"/>
+								<Select id="source" width="140px">
+										<core:ListItem
+										text="o32990236"
+										key="o32990236"/>
+										<core:ListItem
+										text="o32960222"
+										key="o32960222"/>
+										<core:ListItem
+										text="o32950252"
+										key="o32950252"/>
+								</Select>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Domain">
 							<f:fields>
-							<Input value="{/order/domain}" valueLiveUpdate="true" width="50px" enabled="{/enabled}" required="true"/>
+								<Select id="domain" width="60px">
+									<core:ListItem
+									text="DE"
+									key="DE"/>
+									<core:ListItem
+									text="RU"
+									key="RU"/>
+									<core:ListItem
+									text="IT"
+									key="IT"/>
+								</Select>
 							</f:fields>
 						</f:FormElement>
 							</f:formElements>
@@ -62,71 +113,76 @@
 			</f:Form>
 	</VBox>
 	
-	<Panel headerText="Product Information" class="sapUiResponsiveMargin" width="auto">
+
+<Panel headerText="Product Information" class="sapUiSmallMarginBottom" width="auto">
 	<content>
 			<t:Table
-	           	selectionMode="MultiToggle"
+			    id = "prTable"
+			    visibleRowCount = "5"
+			   	selectionMode="MultiToggle"
 				paste="onPaste"
+				rows="{/ABProducts}"
 				>
 				<t:columns>
 					<t:Column width="10rem">
 						<Label text="Product ID"/>
 							<t:template>
-								<Input value="{products>/Products/ProductName}"/>
+								<Input value="{ProductID}"/>
 							</t:template>
 					</t:Column>
-						<t:Column width="10rem">
+						<t:Column width="8rem">
 							<Label text="Product Name"/>
 							<t:template>
 								<Input value="{ProductName}"/>
 							</t:template>
 					</t:Column>
-						<t:Column width="5rem">
+					<t:Column width="8rem">
+							<Label text="Product Cathegory"/>
+							<t:template>
+								<Input value="{ProductCategory}"/>
+							</t:template>
+					</t:Column>
+					<t:Column width="5rem">
 							<Label text="Amount"/>
 							<t:template>
-								<Input value="{ProductName}"/>
+								<Input value="{Amount}"/>
 							</t:template>
 					</t:Column>
 						<t:Column width="6rem">
 						<Label text="Quantity"/>
 							<t:template>
-								<Input value="{ProductName}"/>
+								<Input value="{Quantity}"/>
 							</t:template>
 					</t:Column>
-						<t:Column width="5rem">
+						<t:Column width="8rem">
 						<Label text="Color"/>
 						<t:template>
-								<Input value="ProductName"/>
+								<Input value="{Color}"/>
 						</t:template>
 					</t:Column>
 						<t:Column width="4rem">
 						<Label text="Size"/>
 						<t:template>
-								<Input value="ProductName"/>
+								<Input value="{Size}"/>
 						</t:template>
 					</t:Column>
 						<t:Column width="8rem">
 						<Label text="Monogram Text"/>
 						<t:template>
-								<Input value="ProductName"/>
+								<Input value="{Monogram}"/>
 						</t:template>
 					</t:Column>
 				    <t:Column width="6rem">
 						<Label text="Language"/>
 						<t:template>
-								<Input value="ProductName"/>
+								<Input value="{Language}"/>
 						</t:template>
 					</t:Column>
-					<t:Column width="10rem">
-						<Label text="Image URL"/>
-						<t:template>
-								<Input value="ProductName"/>
-						</t:template>
-					</t:Column>
+				
 						<t:Column width="10rem">
 						<Label text="Navigation URL"/>
 						<t:template>
-								<Input value="ProductName"/>
+								<Input value="{Navigation}"/>
 						</t:template>
 					</t:Column>
 				</t:columns>
@@ -138,89 +194,73 @@
 			</t:footer>
 		</t:Table>
 </content>
-	
-	
 </Panel>
-					<Panel headerText="{i18n>panel2HeaderText}" class="sapUiResponsiveMargin" width="auto">
-						<content>
-							<l:HorizontalLayout>
-							<l:VerticalLayout>
-								<Label labelFor="address" text="{i18n>address}"/>
-								<FormattedText class="sapUiSmallMarginBottom "
-									htmlText="{/address/street}&lt;br&gt;{/address/zip} {/address/city}&lt;br&gt;{/address/country}"
-									id="address" 
-									width="200px"/>
-									<Link href="{
-									parts:[
-										'/firstName',
-										'/lastName'
-									],
-									formatter: '.formatMail'
-									}"
-								text="{i18n>sendEmail}"/>
-							</l:VerticalLayout>
-							<l:VerticalLayout>
-									<Label labelFor="salesAmount" text="{i18n>salesAmount}:"/>
-									<Input description="{/currencyCode}" enabled="{/enabled}" id="salesAmount"
-										value="{
-											parts: [
-												{path: '/salesAmount'},
-												{path: '/currencyCode'}
-											],
-											type: 'sap.ui.model.type.Currency',
-											formatOptions: {showMeasure: false}
-										}" width="200px"/>
-								</l:VerticalLayout>
-							</l:HorizontalLayout>
-						</content>
-					</Panel>
+
+	
+	
+	<Panel headerText="Product Information" class="sapUiResponsiveMargin" width="auto">
+	<content>
+			<Table id="ProdTable" items = "{/ABProducts}">
+				<columns>
+					<Column width="8rem">
+						<Text text="Product ID"/>
+					</Column>
+					<Column width="10rem">
+						<Text text="Product Name"/>
+					</Column>
+					<Column width="8rem">
+						<Text text="Product Cathegory"/>
+					</Column>
+					<Column width="5rem">
+						<Text text="Amount"/>
+					</Column>
+					<Column width="4rem">
+						<Text text="Quantity"/>
+					</Column>
+						<Column width="5rem">
+						<Text text="Color"/>
+					</Column>
+					<Column width="4rem">
+						<Text text="Size"/>
+					</Column>
+					<Column width="5rem">
+						<Text text="Monogram Tex"/>
+					</Column>
+					<Column width="6rem">
+						<Text text="Language"/>
+					</Column>
+     				<Column width="10rem">
+						<Text text="Navigation URL"/>
+					</Column>
+				</columns>	
+				<items>
+					<ColumnListItem type ="Active">
+						<cells>
+							<Input value="{ProductID}"/>
+							<Input value="{ProductName}"/>
+							<Input value="{ProductCategory}"/>
+							<Input value="{Amount}"/>
+							<Input value="{Quantity}"/>
+							<Input value="{Color}"/>
+							<Input value="{Size}"/>
+							<Input value="{Monogram}"/>
+							<Input value="{Language}"/>
+							<Input value="{Navigation}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
 					
-					
-					<Panel headerText="{i18n>panel3HeaderText}" class="sapUiResponsiveMargin" width="auto">
-						<List
-							id="ProductList"
-							headerText="{i18n>productListTitle}"
-							items="{
-								path: 'products>/Products',
-								factory: '.productListFactory'
-							}">
-							<dependents>
-								<core:Fragment fragmentName="sap.ui.demo.db.view.ProductSimple" type="XML"/>
-								<core:Fragment fragmentName="sap.ui.demo.db.view.ProductExtended" type="XML"/>
-							</dependents>
-						</List>
-						
-					</Panel>
-					
-					<Panel id="productDetailsPanel" headerText="{i18n>panel4HeaderText}" class="sapUiResponsiveMargin" width="auto">
-						<f:SimpleForm editable="true" layout="ColumnLayout">
-							<Label text="{i18n>ProductID}"/>
-							<Input value="{products>ProductID}"/>
-				
-							<Label text="{i18n>ProductName}"/>
-							<Input value="{products>ProductName}"/>
-				
-							<Label text="{i18n>QuantityPerUnit}"/>
-							<Input value="{products>QuantityPerUnit}"/>
-				
-							<Label text="{i18n>UnitPrice}"/>
-							<Input value="{products>UnitPrice}"/>
-				
-							<Label text="{i18n>UnitsInStock}"/>
-							<Input value="{products>UnitsInStock}"/>
-				
-							<Label text="{i18n>Discontinued}"/>
-							<CheckBox selected="{products>Discontinued}"/>
-						</f:SimpleForm>
-					</Panel>
+			</Table>
+</content>
+</Panel>
 					<footer>
 						<Toolbar>
 							<ToolbarSpacer/>
 							<Button
 							id="postAB"
-							press="onPress"
+							press=".onPostAB"
 							class="sapUiTinyMarginBeginEnd"
-							 type="Emphasized"
+							type="Emphasized"
 							icon="sap-icon://cart-3"
 							text="Post Abandoned Basket">
 					<customData>

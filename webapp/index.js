@@ -13,24 +13,18 @@ sap.ui.require([
 		oProductModel.loadData("./model/Products.json");
 		sap.ui.getCore().setModel(oProductModel, "products");
 		
-		// Create a JSON model from an object literal
-		var oModel = new JSONModel({
-			contact: "029EDDA221031ED7A1D123E9813315B1",
-			order: {
-					currency : "GBP",
-					locale: "de_DE_EUR",
-					domain: "DE",
-					count: "1"
-			},
-			currency : "GBP",
-			locale: "de_DE_EUR",
-			domain: "DE",
-			count: "1"
-		});
-		 oModel.setDefaultBindingMode(BindingMode.OneWay);
-
+		//JSON model for AB products
+		var oABProductModel =new JSONModel();
+		oABProductModel.loadData("./model/ABProducts.json");
+	//	sap.ui.getCore().setModel(oABProductModel, "abproducts");
+	//	var oTable = sap.ui.getCore().byId("ProdTable");
+	//	oTable.setModel(oABProductModel);
+		
+	
 		// Assign the model object to the SAPUI5 core
-		sap.ui.getCore().setModel(oModel);
+		//sap.ui.getCore().setModel(oModel);
+		
+		sap.ui.getCore().setModel(oABProductModel);
 		
 		// Create a resource bundle for language-specific texts
 		// the configured supportedLocales represent the i18n files present:
