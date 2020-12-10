@@ -83,7 +83,7 @@ sap.ui.define([
 			// POST request
 			onPostAB: function(oInteractionModel){
 				
-			var oInteractionModel = {
+	/*		var oInteractionModel = {
 		
   "InteractionUUID": "00000000-0000-0000-0000-000000000000",
   "InteractionContactOrigin": "EMAIL",
@@ -159,11 +159,11 @@ sap.ui.define([
       }
     ]
   }
- };
+ };*/
  	       var	oBundle, sRecipient,sCurrency, sLocale, sSource, sDomain, oLength,sNavigation;
  	       
  	       	oBundle = this.getView().getModel("i18n").getResourceBundle();
-/*			sRecipient = this.byId("email").getValue();
+       		sRecipient = this.byId("email").getValue();
 			sCurrency = this.byId("currency").getSelectedItem().getKey();
 			sLocale = this.byId("locale").getSelectedItem().getKey();
 			sSource = this.byId("source").getSelectedItem().getKey();
@@ -176,17 +176,70 @@ sap.ui.define([
 			var oTable = this.getView().byId("prTable");  
 			var oRowsBinding = oTable.getBinding("rows");
     	    oLength = oRowsBinding.getLength();    
-    	    
-	        //form payload to be post
-	        var aProducts = [];
-	        var aProductCategories =[];
-	        //var totalAmount = 0;
-	         //get array of rows in table
+    	    //get array of rows in table
 	        var oPrTable = this.byId("prTable");
 			var rows = oPrTable.getRows();
-	     	for ( var i = 0; i < rows.length; i++ ) {
+	     	
+	        //form payload to be post
+	        
+	        var aProducts = [];
+	        var aProductCategories =[];
+	       
+			var oInteractionModel = {
+				  "InteractionUUID": "00000000-0000-0000-0000-000000000000",
+				  "InteractionContactOrigin": "EMAIL",
+				  "InteractionContactId": sRecipient,
+				  "CommunicationMedium": "ONLINE_SHOP",
+				  "InteractionType": "SHOP_CART_ABANDONED",
+				  "InteractionLanguage": sDomain,
+				  "InteractionTimeStampUTC": new Date(),
+				  "InteractionSourceObject": sSource,  
+				  "InteractionReason": "REGISTERED_CUSTOMERS",
+				  "InteractionIsAnonymous": false,
+				  "InteractionAmount":  "30.00",
+				  "InteractionCurrency": sCurrency,
+				  "InteractionSourceDataURL": sNavigation,
+				  "InteractionSourceTimeStampUTC": new Date(),
+				  "YY1_PRICE_LIST_LOCALE_MIA":sLocale,
+				  "InteractionAdditionalObjects": {
+				    "results": [
+				      {
+				        "InteractionUUID": "00000000-0000-0000-0000-000000000000",
+			        	"MarketingObjectType": "Email",
+				        "MarketingObject": sRecipient
+				      }
+				    ]
+					},
+					
+				  "InteractionProducts": {
+				        "results": [
+	//			        	    "InteractionProductUUID": "00000000-0000-0000-0000-000000000000",
+	//					        "ProductOrigin": "EXTERNAL_01",
+	//					        "Product": "80181731",
+	//					        "YY1_SIZE_MIP": "S",
+	//					        "YY1_COLOUR_MIP": "Black",
+	//					        "InteractionProductAmount": "50.00",
+	//					        "InteractionProductQuantity": "1.00000"
+				        ]
+					}, 
+					
+				   "InteractionProductCategories": {
+    					"results": [
+    	//						"InteractionUUID": "00000000-0000-0000-0000-000000000000",
+		//				        "ProductCategoryHierarchy": "ATG",
+		//				        "ProductCategory": "cat2330046"  
+    					]
+					 }
+	
+		 	};
+		 //	oInteractionModel.InteractionProducts.results.push(aProducts);
+		// 	oInteractionModel.InteractionProductCategories.results.push(aProductCategories);
+		 	for ( var i = 0; i < rows.length; i++ ) {
+		//	var totalAmount = 10;
+	      
 	    // 	totalAmount += rows[i].getCells()[3].getProperty("value")*rows[i].getCells()[4].getProperty("value");
-			aProducts.push({
+			
+			oInteractionModel.InteractionProducts.results.push({
 		        InteractionProductUUID: "00000000-0000-0000-0000-000000000000",
 		        ProductOrigin: "EXTERNAL_01",
 		        Product: rows[i].getCells()[0].getProperty("value"),
@@ -194,16 +247,15 @@ sap.ui.define([
 		        YY1_COLOUR_MIP: rows[i].getCells()[5].getProperty("value"),
 		        InteractionProductAmount: rows[i].getCells()[3].getProperty("value"),
 		        InteractionProductQuantity: rows[i].getCells()[4].getProperty("value"),
-		       
             });
-            aProductCategories.push({
+           oInteractionModel.InteractionProductCategories.results.push({
             	InteractionUUID: "00000000-0000-0000-0000-000000000000",
 		        ProductCategoryHierarchy: "ATG",
 		        ProductCategory: rows[i].getCells()[2].getProperty("value"),   
             });
             } //  END get array of rows in table
 	        
-	       
+	      /* 
 	        var oInteractionModel = {
 				  "InteractionUUID": "00000000-0000-0000-0000-000000000000",
 				  "InteractionContactOrigin": "EMAIL",
@@ -231,7 +283,7 @@ sap.ui.define([
 					},
 					
 				  "InteractionProducts": {
-				        "results": [{
+				        "results": [
 	//			        	    "InteractionProductUUID": "00000000-0000-0000-0000-000000000000",
 	//					        "ProductOrigin": "EXTERNAL_01",
 	//					        "Product": "80181731",
@@ -239,22 +291,23 @@ sap.ui.define([
 	//					        "YY1_COLOUR_MIP": "Black",
 	//					        "InteractionProductAmount": "50.00",
 	//					        "InteractionProductQuantity": "1.00000"
-				        }]
+				        ]
 					}, 
 					
 				   "InteractionProductCategories": {
-    					"results": [{
+    					"results": [
     	//						"InteractionUUID": "00000000-0000-0000-0000-000000000000",
 		//				        "ProductCategoryHierarchy": "ATG",
 		//				        "ProductCategory": "cat2330046"  
-    					}]
+    					]
 					 }
 	
 		 	};
-		 	oInteractionModel.InteractionProducts.results.push(aProducts);
-		 	oInteractionModel.InteractionProductCategories.results.push(aProductCategories);
-		 	
 		 	*/
+		 //	oInteractionModel.InteractionProducts.results.push(aProducts);
+		// 	oInteractionModel.InteractionProductCategories.results.push(aProductCategories);
+		 	
+		 
 		 	/*
 		 	oInteractionModel.setProperty("/InteractionProducts/results",aProducts);
 		 	oInteractionModel.setProperty("/InteractionProductCategories/results",aProductCategories);
