@@ -29,12 +29,12 @@
 					<f:formElements>
 						<f:FormElement  label="Email">
 							<f:fields>
-								<Input  id="email" enabled="{/enabled}"  valueLiveUpdate="true" width="300px" required="true"/>
+								<Input  id="email" enabled="{/enabled}" valueLiveUpdate="true" width="300px" required="true" liveChange ="onTypeEmail"/>
 						</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Navigation">
 							<f:fields>
-								<Input id="navigation" enabled="{/enabled}"  valueLiveUpdate="true" width="350px" required="true"/>
+								<Input id="navigation" enabled="{/enabled}"  valueLiveUpdate="true" width="350px" required="true" liveChange ="onTypeNavigation"/>
 						</f:fields>
 						</f:FormElement>
 						</f:formElements>
@@ -119,8 +119,7 @@
 			<t:Table
 			    id = "prTable"
 			    visibleRowCount = "5"
-			   	selectionMode="MultiToggle"
-				paste="onPaste"
+			   	selectionMode = "MultiToggle"
 				rows="{/ABProducts}"
 				>
 				<t:columns>
@@ -154,7 +153,7 @@
 								<Input value="{Quantity}"/>
 							</t:template>
 					</t:Column>
-						<t:Column width="8rem">
+						<t:Column width="10rem">
 						<Label text="Color"/>
 						<t:template>
 								<Input value="{Color}"/>
@@ -190,6 +189,7 @@
 					<Toolbar>
 						<ToolbarSpacer/>
 						<Button icon="sap-icon://add" tooltip="Add a Row" press="onPressAddRow"/>
+						<Button text="Delete" tooltip="Delete a Row" press="onPressDeleteRow"/>
 					</Toolbar>
 			</t:footer>
 		</t:Table>
@@ -199,9 +199,16 @@
 	
 	
 	<Panel headerText="Product Information" class="sapUiResponsiveMargin" width="auto">
+	<headerToolbar>
+		<Toolbar height="3rem">
+		<ToolbarSpacer/>
+		<Button icon="sap-icon://add" tooltip="Add a Row" press="onPressAddRow"/>
+		<Button icon="sap-icon://sys-minus"  tooltip="Delete a Row" press="onPressDeleteRow"/>
+		</Toolbar>
+	</headerToolbar>
 	<content>
-			<Table id="ProdTable" items = "{/ABProducts}">
-				<columns>
+			<Table id="ProdTable"  items = "{/ABProducts}"  mode= "MultiSelect" growing="true" growingScrollToLoad="false" >
+				<columns class="sapUiSmallMargin">
 					<Column width="8rem">
 						<Text text="Product ID"/>
 					</Column>
@@ -229,23 +236,19 @@
 					<Column width="6rem">
 						<Text text="Language"/>
 					</Column>
-     				<Column width="10rem">
-						<Text text="Navigation URL"/>
-					</Column>
-				</columns>	
+     			</columns>	
 				<items>
 					<ColumnListItem type ="Active">
 						<cells>
 							<Input value="{ProductID}"/>
-							<Input value="{ProductName}"/>
-							<Input value="{ProductCategory}"/>
-							<Input value="{Amount}"/>
+							<Input  value="{ProductName}"/>
+							<Input  value="{ProductCategory}"/>
+							<Input  value="{Amount}"/>
 							<Input value="{Quantity}"/>
 							<Input value="{Color}"/>
 							<Input value="{Size}"/>
 							<Input value="{Monogram}"/>
 							<Input value="{Language}"/>
-							<Input value="{Navigation}"/>
 						</cells>
 					</ColumnListItem>
 				</items>

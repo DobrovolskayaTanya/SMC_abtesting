@@ -10,15 +10,15 @@ sap.ui.require([
 	sap.ui.getCore().attachInit(function () {
 		
 		var oProductModel =new JSONModel();
-		oProductModel.loadData("./model/Products.json");
-		sap.ui.getCore().setModel(oProductModel, "products");
-		
+		//oProductModel.loadData("./model/Products.json");
+		//sap.ui.getCore().setModel(oProductModel, "products");
+		//oTable._getSelectAllCheckbox().setVisible(false);
 		//JSON model for AB products
 		var oABProductModel =new JSONModel();
 		oABProductModel.loadData("./model/ABProducts.json");
 	//	sap.ui.getCore().setModel(oABProductModel, "abproducts");
 	//	var oTable = sap.ui.getCore().byId("ProdTable");
-	//	oTable.setModel(oABProductModel);
+		
 		
 	
 		// Assign the model object to the SAPUI5 core
